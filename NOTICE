@@ -1,0 +1,24 @@
+Built with Llama
+
+Llama 3.1 is licensed under the Llama 3.1 Community License,
+Copyright © Meta Platforms, Inc. All Rights Reserved.
+
+------------------------------------------------------------------------
+
+This repository distributes a fine-tuned derivative model:
+
+  Model name:   Llama-3.1-8B-Chess-UCI
+  Base model:   unsloth/Meta-Llama-3.1-8B
+                (Meta Llama 3.1 8B, base / non-Instruct)
+  Base revision: e9a141a2091ea561b96483212645a2a05e6f99fc
+
+"Llama-3.1-8B-Chess-UCI" is a derivative of Meta Llama 3.1 8B, created by
+full fine-tuning on chess move sequences (UCI notation). As a derivative of
+the Llama Materials, its use is governed by the Llama 3.1 Community License.
+
+In accordance with that license:
+  - A copy of the Llama 3.1 Community License is included as ./LICENSE
+  - The Llama 3.1 Acceptable Use Policy is included as ./USE_POLICY.md
+  - This product is "Built with Llama" and the model name begins with "Llama"
+
+See ./LICENSE and ./USE_POLICY.md for the full terms.

@@ -1,0 +1,20 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# data: ignore large regenerable train/val, COMMIT the frozen eval set + manifest
+data/train.jsonl
+data/val.jsonl
+data/train_uci.jsonl
+data/val_uci.jsonl
+data/raw/
+outputs/
+adapters/
+merged-model/
+models/
+*.safetensors
+
+results/_scratch/
+.DS_Store

@@ -1,0 +1,117 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+== BASE (unsloth/Meta-Llama-3.1-8B) ==
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The tokenizer you are loading from '/root/Chess/merged-model/chess-ft' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+
+----- DEBUG chess-base: prompt/gen/parse on first 10 positions -----
+  hist(tail) ...'c3 d3 4. Bxd3 e6 5. Nf3 a6 6. O-O Qc7 7.'  actual='e5'
+    no-space : raw=' Re1 Nc6 8.'                -> f1e1
+    w/ space : raw='0-0 Nf6 8'                  -> ILLEGAL/None
+  hist(tail) ...' 8. exd6 Bxd6 9. h3 Nf6 10. Na3 Nbd7 11.'  actual='Nc4'
+    no-space : raw=' Nc4 Bc5 12'                -> a3c4
+    w/ space : raw='0-0 Nc5 12'                 -> ILLEGAL/None
+  hist(tail) ...'. Nce5 Bb7 14. Bf4 Bd6 15. Nxd7 Nxd7 16.'  actual='Bxd6'
+    no-space : raw=' Bxd6 Qxd6 17'              -> f4d6
+    w/ space : raw='0-0-0 O-O '                 -> ILLEGAL/None
+  hist(tail) ...'8. Rfe1 Nf6 19. Ne5 O-O 20. Bc2 Rad8 21.'  actual='Ng4'
+    no-space : raw=' Qe4 Qc5 22'                -> e2e4
+    w/ space : raw='0-0 Rfe8 22'                -> ILLEGAL/None
+  hist(tail) ...'g4 4. O-O Bxf3 5. Bxf3 Nd7 6. d4 Ngf6 7.'  actual='b3'
+    no-space : raw=' c4 e6 8. N'                -> c2c4
+    w/ space : raw='0-0 e6 8.'                  -> ILLEGAL/None
+  hist(tail) ...'3 e5 8. Bb2 e4 9. Bg2 Bd6 10. f4 O-O 11.'  actual='e3'
+    no-space : raw=' Qe1 Re8 12.'               -> d1e1
+    w/ space : raw='0-0 exf3 12'                -> ILLEGAL/None
+  hist(tail) ...'4 13. Re1 Ndf6 14. Nf1 h4 15. h3 Nh6 16.'  actual='g4'
+    no-space : raw=' Qe2 hxg3 17'               -> d1e2
+    w/ space : raw='0-0 hxg3 17'                -> ILLEGAL/None
+  hist(tail) ...'g5 18. f5 Rc8 19. Nf1 Bb8 20. c3 Nf6 21.'  actual='Ba3'
+    no-space : raw=' Qd2 Qe7 22'                -> d1d2
+    w/ space : raw='0-0-0 c5 '                  -> ILLEGAL/None
+  hist(tail) ...'5 Nxd5 4. e4 Nf6 5. Nc3 e6 6. Nf3 Be7 7.'  actual='e5'
+    no-space : raw=' Bd3 O-O 8. O'              -> f1d3
+    w/ space : raw='0-0 0-0 '                   -> ILLEGAL/None
+  hist(tail) ...' 8. Bd3 Nxc3 9. bxc3 c5 10. O-O cxd4 11.'  actual='cxd4'
+    no-space : raw=' cxd4 O-O 12.'              -> c3d4
+    w/ space : raw='0-0 Nc6 12'                 -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-base: 50/774
+  chess-base: 100/774
+  chess-base: 150/774
+  chess-base: 200/774
+  chess-base: 250/774
+  chess-base: 300/774
+  chess-base: 350/774
+  chess-base: 400/774
+  chess-base: 450/774
+  chess-base: 500/774
+  chess-base: 550/774
+  chess-base: 600/774
+  chess-base: 650/774
+  chess-base: 700/774
+  chess-base: 750/774
+  -> {'model': 'chess-base', 'n': 774, 'legal_move_rate': 0.8824, 'move_match_actual': 0.3075, 'move_match_stockfish': 0.2248, 'mean_acpl_legal': 1051.3}
+== FINE-TUNED (/root/Chess/merged-model/chess-ft) ==
+
+----- DEBUG chess-ft: prompt/gen/parse on first 10 positions -----
+  hist(tail) ...'c3 d3 4. Bxd3 e6 5. Nf3 a6 6. O-O Qc7 7.'  actual='e5'
+    no-space : raw=' Re1 Nf6 8.'                -> f1e1
+    w/ space : raw='0-0 Nf6 8'                  -> ILLEGAL/None
+  hist(tail) ...' 8. exd6 Bxd6 9. h3 Nf6 10. Na3 Nbd7 11.'  actual='Nc4'
+    no-space : raw=' Nc4 Bc5 12'                -> a3c4
+    w/ space : raw='0-0 Be7 12.'                -> ILLEGAL/None
+  hist(tail) ...'. Nce5 Bb7 14. Bf4 Bd6 15. Nxd7 Nxd7 16.'  actual='Bxd6'
+    no-space : raw=' Bxd6 Qxd6 17'              -> f4d6
+    w/ space : raw='0-0 Nf6 17'                 -> ILLEGAL/None
+  hist(tail) ...'8. Rfe1 Nf6 19. Ne5 O-O 20. Bc2 Rad8 21.'  actual='Ng4'
+    no-space : raw=' Qe4 Qc5 22'                -> e2e4
+    w/ space : raw='0-0 Rfe8 22'                -> ILLEGAL/None
+  hist(tail) ...'g4 4. O-O Bxf3 5. Bxf3 Nd7 6. d4 Ngf6 7.'  actual='b3'
+    no-space : raw=' c4 e6 8. N'                -> c2c4
+    w/ space : raw='0-0 e6 8.'                  -> ILLEGAL/None
+  hist(tail) ...'3 e5 8. Bb2 e4 9. Bg2 Bd6 10. f4 O-O 11.'  actual='e3'
+    no-space : raw=' f5 Ne5 12. e'              -> f4f5
+    w/ space : raw='0-0 Re8 12.'                -> ILLEGAL/None
+  hist(tail) ...'4 13. Re1 Ndf6 14. Nf1 h4 15. h3 Nh6 16.'  actual='g4'
+    no-space : raw=' Nxh2 hxg3 17'              -> f1h2
+    w/ space : raw='0-0 hxg3 17'                -> ILLEGAL/None
+  hist(tail) ...'g5 18. f5 Rc8 19. Nf1 Bb8 20. c3 Nf6 21.'  actual='Ba3'
+    no-space : raw=' Qd2 Qd7 22'                -> d1d2
+    w/ space : raw='0-0 Nxf5 22'                -> ILLEGAL/None
+  hist(tail) ...'5 Nxd5 4. e4 Nf6 5. Nc3 e6 6. Nf3 Be7 7.'  actual='e5'
+    no-space : raw=' Bd3 O-O 8. O'              -> f1d3
+    w/ space : raw='0-0 O-O 8.'                 -> ILLEGAL/None
+  hist(tail) ...' 8. Bd3 Nxc3 9. bxc3 c5 10. O-O cxd4 11.'  actual='cxd4'
+    no-space : raw=' cxd4 O-O 12.'              -> c3d4
+    w/ space : raw='0-0 O-O 12.'                -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-ft: 50/774
+  chess-ft: 100/774
+  chess-ft: 150/774
+  chess-ft: 200/774
+  chess-ft: 250/774
+  chess-ft: 300/774
+  chess-ft: 350/774
+  chess-ft: 400/774
+  chess-ft: 450/774
+  chess-ft: 500/774
+  chess-ft: 550/774
+  chess-ft: 600/774
+  chess-ft: 650/774
+  chess-ft: 700/774
+  chess-ft: 750/774
+  -> {'model': 'chess-ft', 'n': 774, 'legal_move_rate': 0.916, 'move_match_actual': 0.3501, 'move_match_stockfish': 0.2597, 'mean_acpl_legal': 875.4}
+== FT vs Stockfish 1200 (10 games) ==
+  -> {'opponent': 'stockfish:1200', 'games': 10, 'wins': 0, 'draws': 0, 'losses': 10, 'score_rate': 0.0}
+
+================ VERDICT ================
+metric                    base    fine-tuned
+legal-move %            0.8824         0.916
+match human             0.3075        0.3501
+match SF                0.2248        0.2597
+ACPL (lower=better)     1051.3         875.4
+========================================

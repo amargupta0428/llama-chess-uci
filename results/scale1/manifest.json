@@ -1,0 +1,10 @@
+{
+  "dataset": "Lichess/standard-chess-games",
+  "min_elo": 1800,
+  "seed": 42,
+  "n_train_games": 80000,
+  "n_val_games": 1000,
+  "n_eval_games": 300,
+  "n_eval_positions": 1167,
+  "eval_sha256": "ae50599ccf52103529d3a6bcd207a7e9806a78269ad45eb48d6079dd5fb4b756"
+}

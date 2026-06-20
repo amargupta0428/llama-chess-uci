@@ -1,0 +1,18 @@
+# ---- data + eval (laptop, no GPU) ----
+python-chess>=1.999      # PGN parsing, legality, board state, UCI engine interface
+datasets>=2.19           # stream high-Elo games from Hugging Face
+python-dotenv>=1.0
+tqdm>=4.66
+matplotlib>=3.8
+pandas>=2.2
+openai>=1.40             # GPT-4o baseline contestant
+
+# Stockfish: install the BINARY (not a pip pkg):
+#   macOS:  brew install stockfish
+#   linux:  apt-get install -y stockfish
+# python-chess talks to it over UCI (chess.engine.SimpleEngine).
+
+# ---- training + serving (GPU box only) ----
+#   pip install "unsloth @ git+https://github.com/unslothai/unsloth.git"
+#   pip install trl transformers peft accelerate bitsandbytes datasets vllm
+#   (full fine-tune path: accelerate + FSDP, or unsloth full_finetuning=True)

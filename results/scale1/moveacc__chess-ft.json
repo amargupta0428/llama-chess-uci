@@ -1,0 +1,8 @@
+{
+  "model": "chess-ft",
+  "n": 1167,
+  "legal_move_rate": 0.9366,
+  "move_match_actual": 0.3805,
+  "move_match_stockfish": 0.2845,
+  "mean_acpl_legal": 1361.9
+}

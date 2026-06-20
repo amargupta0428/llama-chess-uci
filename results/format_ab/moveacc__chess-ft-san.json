@@ -1,0 +1,10 @@
+{
+  "model": "chess-ft-san",
+  "n": 300,
+  "n_legal": 269,
+  "legal_move_rate": 0.8967,
+  "move_match_actual": 0.3167,
+  "move_match_stockfish": 0.26,
+  "mean_acpl_legal": 544.5,
+  "median_acpl_legal": 72
+}

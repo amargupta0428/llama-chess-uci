@@ -1,0 +1,87 @@
+== BASE [san] (unsloth/Meta-Llama-3.1-8B) ==
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+
+----- DEBUG chess-base-san [san]: prompt/gen/parse on first 8 positions -----
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  hist(tail) ...'f6 4. Bg5 dxe4 5. f3 exf3 6. Nxf3 Be7 7.'  actual='f1d3'
+    no-space : raw=' Qd2 Nc6 8'                 -> d1d2
+    w/ space : raw='0-0 0-0 '                   -> ILLEGAL/None
+  hist(tail) ...'h6 8. Bh4 Nc6 9. O-O Nb4 10. Be2 Nc6 11.'  actual='a2a3'
+    no-space : raw=' a3 Nxd4 12.'               -> a2a3
+    w/ space : raw='0-0 O-O 12.'                -> ILLEGAL/None
+  hist(tail) ...'3. Nxd4 Qxd4+ 14. Bf2 Qd8 15. Qf3 c6 16.'  actual='a1d1'
+    no-space : raw=' Rae1 Bf6 17.'              -> a1e1
+    w/ space : raw='0-0-0 Bf6'                  -> ILLEGAL/None
+  hist(tail) ...' 18. Qg3 Qg4 19. Qe5 Qh5 20. Qg3 Bc5 21.'  actual='g1h1'
+    no-space : raw=' Bxc5 Qxc5+ '               -> e3c5
+    w/ space : raw='0-0-0 Bxe3'                 -> ILLEGAL/None
+  hist(tail) ...' c6 4. Nc3 d5 5. Be3 dxe4 6. Nxe4 Nf6 7.'  actual='f1d3'
+    no-space : raw=' Nxf6+ exf6 '               -> e4f6
+    w/ space : raw='0-0 0-0 '                   -> ILLEGAL/None
+  hist(tail) ...'8. Bxe4 Nd7 9. Qd3 Nf6 10. O-O-O O-O 11.'  actual='h2h3'
+    no-space : raw=' Bg5 h6 12.'                -> e3g5
+    w/ space : raw='0-0-0 b5 '                  -> ILLEGAL/None
+  hist(tail) ...'5 13. Qh4 Qa5 14. a3 Rfe8 15. g4 Be4 16.'  actual='f3g5'
+    no-space : raw=' Qxe4 Qxe4 17'              -> ILLEGAL/None
+    w/ space : raw='0-0-0 Bf5'                  -> ILLEGAL/None
+  hist(tail) ...' 18. Rxh1 Qd5 19. Rh2 e5 20. h4 exd4 21.'  actual='e3d2'
+    no-space : raw=' h5 Qd6 22.'                -> h4h5
+    w/ space : raw='0-0-0 Qe5'                  -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-base-san: 50/300
+  chess-base-san: 100/300
+  chess-base-san: 150/300
+  chess-base-san: 200/300
+  chess-base-san: 250/300
+  chess-base-san: 300/300
+  -> {'model': 'chess-base-san', 'n': 300, 'n_legal': 260, 'legal_move_rate': 0.8667, 'move_match_actual': 0.2567, 'move_match_stockfish': 0.22, 'mean_acpl_legal': 578.1, 'median_acpl_legal': 84.0}
+== FINE-TUNED [san] (merged-model/chess-ft-san) ==
+The tokenizer you are loading from 'merged-model/chess-ft-san' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+
+----- DEBUG chess-ft-san [san]: prompt/gen/parse on first 8 positions -----
+  hist(tail) ...'f6 4. Bg5 dxe4 5. f3 exf3 6. Nxf3 Be7 7.'  actual='f1d3'
+    no-space : raw=' Bd3 O-O 8. O'              -> f1d3
+    w/ space : raw='0-0 Nbd7 8'                 -> ILLEGAL/None
+  hist(tail) ...'h6 8. Bh4 Nc6 9. O-O Nb4 10. Be2 Nc6 11.'  actual='a2a3'
+    no-space : raw=' a3 a6 12. Q'               -> a2a3
+    w/ space : raw='0-0 O-O 12.'                -> ILLEGAL/None
+  hist(tail) ...'3. Nxd4 Qxd4+ 14. Bf2 Qd8 15. Qf3 c6 16.'  actual='a1d1'
+    no-space : raw=' Rad1 Qc7 17.'              -> a1d1
+    w/ space : raw='0-0-0 Bd6 '                 -> ILLEGAL/None
+  hist(tail) ...' 18. Qg3 Qg4 19. Qe5 Qh5 20. Qg3 Bc5 21.'  actual='g1h1'
+    no-space : raw=' Bxc5 Qxc5+ '               -> e3c5
+    w/ space : raw='0-0 Bxe3+ '                 -> ILLEGAL/None
+  hist(tail) ...' c6 4. Nc3 d5 5. Be3 dxe4 6. Nxe4 Nf6 7.'  actual='f1d3'
+    no-space : raw=' Nxf6+ Bxf6 '               -> e4f6
+    w/ space : raw='0-0 O-O 8.'                 -> ILLEGAL/None
+  hist(tail) ...'8. Bxe4 Nd7 9. Qd3 Nf6 10. O-O-O O-O 11.'  actual='h2h3'
+    no-space : raw=' h4 h5 12. Ng'              -> h2h4
+    w/ space : raw='0-0 Re8 12.'                -> ILLEGAL/None
+  hist(tail) ...'5 13. Qh4 Qa5 14. a3 Rfe8 15. g4 Be4 16.'  actual='f3g5'
+    no-space : raw=' g5 Bxf3 17.'               -> g4g5
+    w/ space : raw='0-0 Bxf3 17'                -> ILLEGAL/None
+  hist(tail) ...' 18. Rxh1 Qd5 19. Rh2 e5 20. h4 exd4 21.'  actual='e3d2'
+    no-space : raw=' h5 Qe5 22.'                -> h4h5
+    w/ space : raw='0-0 Qe5 22'                 -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-ft-san: 50/300
+  chess-ft-san: 100/300
+  chess-ft-san: 150/300
+  chess-ft-san: 200/300
+  chess-ft-san: 250/300
+  chess-ft-san: 300/300
+  -> {'model': 'chess-ft-san', 'n': 300, 'n_legal': 269, 'legal_move_rate': 0.8967, 'move_match_actual': 0.3167, 'move_match_stockfish': 0.26, 'mean_acpl_legal': 544.5, 'median_acpl_legal': 72}
+== FT vs Stockfish 1200 (6 games) ==
+  -> {'opponent': 'stockfish:1200', 'games': 6, 'wins': 0, 'draws': 0, 'losses': 6, 'score_rate': 0.0}
+
+================ VERDICT ================
+metric                    base    fine-tuned
+legal-move %            0.8667        0.8967
+match human             0.2567        0.3167
+match SF                  0.22          0.26
+ACPL (lower=better)      578.1         544.5
+========================================

@@ -1,0 +1,8 @@
+{
+  "model": "chess-base",
+  "n": 1167,
+  "legal_move_rate": 0.8766,
+  "move_match_actual": 0.2828,
+  "move_match_stockfish": 0.2245,
+  "mean_acpl_legal": 1191.0
+}

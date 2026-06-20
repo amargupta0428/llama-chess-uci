@@ -1,0 +1,163 @@
+stockfish: /usr/games/stockfish
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+### data prep SKIPPED (data/train.jsonl exists: 80000 games)
+### FULL fine-tune (epochs=3 bsz=8 gacc=4 lr=1e-5) + merge
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+==((====))==  Unsloth 2026.6.8: Fast Llama patching. Transformers: 5.5.0.
+   \\   /|    NVIDIA H100 80GB HBM3. Num GPUs = 1. Max memory: 79.179 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.10.0+cu128. CUDA: 9.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = 0.0.35. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Unsloth: Using bfloat16 full finetuning which cuts memory usage by 50%.
+To enable float32 training, use `float32_mixed_precision = True` during FastLanguageModel.from_pretrained
+training on 80000 games (full FT)
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+🦥 Unsloth: Padding-free auto-enabled, enabling faster training.
+==((====))==  Unsloth - 2x faster free finetuning | Num GPUs used = 1
+   \\   /|    Num examples = 80,000 | Num Epochs = 3 | Total steps = 7,500
+O^O/ \_/ \    Batch size per device = 8 | Gradient accumulation steps = 4
+\        /    Data Parallel GPUs = 1 | Total batch size (8 x 4 x 1) = 32
+ "-____-"     Trainable parameters = 8,030,261,248 of 8,030,261,248 (100.00% trained)
+  0%|          | 0/7500 [00:00<?, ?it/s]Unsloth: Will smartly offload gradients to save VRAM!
+Unsloth: Double buffering enabled (parallel H2D + compute) for backward pass.
+Unsloth: Saving full fine-tuned model to '/root/Chess/merged-model/chess-ft' ...
+Unsloth: Restored added_tokens_decoder metadata in /root/Chess/merged-model/chess-ft/tokenizer_config.json.
+Unsloth: Model saved successfully to '/root/Chess/merged-model/chess-ft'
+saved merged fp16 model -> /root/Chess/merged-model/chess-ft (serve with vLLM)
+### in-process eval (base vs full-FT, vs Stockfish)
+== BASE (unsloth/Meta-Llama-3.1-8B) ==
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+
+----- DEBUG chess-base: prompt/gen/parse on first 10 positions -----
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  hist(tail) ...'e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. Bd3 Bd7 7.'  actual='dxc5'
+    no-space : raw=' O-O cxd4 8.'               -> e1g1
+    w/ space : raw='0-0 cxd4 8'                 -> ILLEGAL/None
+  hist(tail) ...'8. O-O Nge7 9. b4 Nxb4 10. cxb4 Bxb4 11.'  actual='Ba3'
+    no-space : raw=' Bb2 Bc5 12'                -> c1b2
+    w/ space : raw='0-0 Bc5 12'                 -> ILLEGAL/None
+  hist(tail) ...'13. Rb1 Qc7 14. Nb5 Bxb5 15. Rxb5 a6 16.'  actual='Rb4'
+    no-space : raw=' Rb1 Qc6 17'                -> b5b1
+    w/ space : raw='0-0 f6 17.'                 -> ILLEGAL/None
+  hist(tail) ...'8. Bb1 Nxe5 19. Nxe5 Qxe5 20. Qd3 f5 21.'  actual='Re1'
+    no-space : raw=' Qd4 Qxd4 22'               -> d3d4
+    w/ space : raw='0-0 f4 22.'                 -> ILLEGAL/None
+  hist(tail) ...' Bg7 4. Nc3 O-O 5. b3 d5 6. cxd5 Nxd5 7.'  actual='Bb2'
+    no-space : raw=' Bb2 Nxc3 8'                -> c1b2
+    w/ space : raw='0-0 Nxc3 8'                 -> ILLEGAL/None
+  hist(tail) ...'b2 c5 8. Bc4 Nb4 9. O-O a6 10. d4 b5 11.'  actual='Be2'
+    no-space : raw=' Bb3 cxd4 12'               -> ILLEGAL/None
+    w/ space : raw='0-0 Bb7 12'                 -> ILLEGAL/None
+  hist(tail) ...'13. Bf3 Bb7 14. a3 Nxd4 15. Bxb7 Rb8 16.'  actual='axb4'
+    no-space : raw=' Bc6 Nxf3+ '                -> b7c6
+    w/ space : raw='0-0 Nc6 17'                 -> ILLEGAL/None
+  hist(tail) ...' 18. Rxa6 e5 19. Qf3 Qc7 20. Rc1 Rc8 21.'  actual='Raa1'
+    no-space : raw=' Qe2 Qb6 22'                -> f3e2
+    w/ space : raw='0-0 Rxc1 22'                -> ILLEGAL/None
+  hist(tail) ...'. b3 e5 4. Bb2 Bd6 5. d4 e4 6. e3 Ne7 7.'  actual='Ne2'
+    no-space : raw=' Ne2 O-O 8. O'              -> g1e2
+    w/ space : raw='0-0 0-0 '                   -> ILLEGAL/None
+  hist(tail) ...'2 O-O 8. Nd2 f5 9. c4 Be6 10. c5 Bc7 11.'  actual='Qc2'
+    no-space : raw=' Nc4 Bf7 12'                -> d2c4
+    w/ space : raw='0-0 Ng6 12.'                -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-base: 50/1167
+  chess-base: 100/1167
+  chess-base: 150/1167
+  chess-base: 200/1167
+  chess-base: 250/1167
+  chess-base: 300/1167
+  chess-base: 350/1167
+  chess-base: 400/1167
+  chess-base: 450/1167
+  chess-base: 500/1167
+  chess-base: 550/1167
+  chess-base: 600/1167
+  chess-base: 650/1167
+  chess-base: 700/1167
+  chess-base: 750/1167
+  chess-base: 800/1167
+  chess-base: 850/1167
+  chess-base: 900/1167
+  chess-base: 950/1167
+  chess-base: 1000/1167
+  chess-base: 1050/1167
+  chess-base: 1100/1167
+  chess-base: 1150/1167
+  -> {'model': 'chess-base', 'n': 1167, 'legal_move_rate': 0.8766, 'move_match_actual': 0.2828, 'move_match_stockfish': 0.2245, 'mean_acpl_legal': 1191.0}
+== FINE-TUNED (/root/Chess/merged-model/chess-ft) ==
+
+----- DEBUG chess-ft: prompt/gen/parse on first 10 positions -----
+  hist(tail) ...'e5 c5 4. c3 Nc6 5. Nf3 Qb6 6. Bd3 Bd7 7.'  actual='dxc5'
+    no-space : raw=' O-O cxd4 8.'               -> e1g1
+    w/ space : raw='0-0 cxd4 8'                 -> ILLEGAL/None
+  hist(tail) ...'8. O-O Nge7 9. b4 Nxb4 10. cxb4 Bxb4 11.'  actual='Ba3'
+    no-space : raw=' Nc3 Bxc3 12'               -> b1c3
+    w/ space : raw='4 Nc6 12. a'                -> ILLEGAL/None
+  hist(tail) ...'13. Rb1 Qc7 14. Nb5 Bxb5 15. Rxb5 a6 16.'  actual='Rb4'
+    no-space : raw=' Rb3 b5 17.'                -> b5b3
+    w/ space : raw='1b6 Qc6 17'                 -> ILLEGAL/None
+  hist(tail) ...'8. Bb1 Nxe5 19. Nxe5 Qxe5 20. Qd3 f5 21.'  actual='Re1'
+    no-space : raw=' Qd4 Qxd4 22'               -> d3d4
+    w/ space : raw='0-O-O Qg5+ '                -> ILLEGAL/None
+  hist(tail) ...' Bg7 4. Nc3 O-O 5. b3 d5 6. cxd5 Nxd5 7.'  actual='Bb2'
+    no-space : raw=' Bb2 Nxc3 8'                -> c1b2
+    w/ space : raw='1Bb2 Nxc3 '                 -> c1b2
+  hist(tail) ...'b2 c5 8. Bc4 Nb4 9. O-O a6 10. d4 b5 11.'  actual='Be2'
+    no-space : raw=' Bb3 cxd4 12'               -> ILLEGAL/None
+    w/ space : raw='1/2-1/2'                    -> ILLEGAL/None
+  hist(tail) ...'13. Bf3 Bb7 14. a3 Nxd4 15. Bxb7 Rb8 16.'  actual='axb4'
+    no-space : raw=' Bxa6 Nc2 17'               -> b7a6
+    w/ space : raw=' exd4 Nc2 17'               -> e3d4
+  hist(tail) ...' 18. Rxa6 e5 19. Qf3 Qc7 20. Rc1 Rc8 21.'  actual='Raa1'
+    no-space : raw=' Rxc7 Rxc7 22'              -> ILLEGAL/None
+    w/ space : raw='1-0 Rxc1 22'                -> ILLEGAL/None
+  hist(tail) ...'. b3 e5 4. Bb2 Bd6 5. d4 e4 6. e3 Ne7 7.'  actual='Ne2'
+    no-space : raw=' Ne2 O-O 8. O'              -> g1e2
+    w/ space : raw='0-0 O-O 8.'                 -> ILLEGAL/None
+  hist(tail) ...'2 O-O 8. Nd2 f5 9. c4 Be6 10. c5 Bc7 11.'  actual='Qc2'
+    no-space : raw=' b4 Ng6 12. a'              -> b3b4
+    w/ space : raw='0-0 Ng6 12.'                -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-ft: 50/1167
+  chess-ft: 100/1167
+  chess-ft: 150/1167
+  chess-ft: 200/1167
+  chess-ft: 250/1167
+  chess-ft: 300/1167
+  chess-ft: 350/1167
+  chess-ft: 400/1167
+  chess-ft: 450/1167
+  chess-ft: 500/1167
+  chess-ft: 550/1167
+  chess-ft: 600/1167
+  chess-ft: 650/1167
+  chess-ft: 700/1167
+  chess-ft: 750/1167
+  chess-ft: 800/1167
+  chess-ft: 850/1167
+  chess-ft: 900/1167
+  chess-ft: 950/1167
+  chess-ft: 1000/1167
+  chess-ft: 1050/1167
+  chess-ft: 1100/1167
+  chess-ft: 1150/1167
+  -> {'model': 'chess-ft', 'n': 1167, 'legal_move_rate': 0.9366, 'move_match_actual': 0.3805, 'move_match_stockfish': 0.2845, 'mean_acpl_legal': 1361.9}
+== FT vs Stockfish 1200 (10 games) ==
+  -> {'opponent': 'stockfish:1200', 'games': 10, 'wins': 0, 'draws': 0, 'losses': 10, 'score_rate': 0.0}
+
+================ VERDICT ================
+metric                    base    fine-tuned
+legal-move %            0.8766        0.9366
+match human             0.2828        0.3805
+match SF                0.2245        0.2845
+ACPL (lower=better)     1191.0        1361.9
+========================================
+### RUN DONE

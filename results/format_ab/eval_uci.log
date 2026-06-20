@@ -1,0 +1,87 @@
+== BASE [uci] (unsloth/Meta-Llama-3.1-8B) ==
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+
+----- DEBUG chess-base-uci [uci]: prompt/gen/parse on first 8 positions -----
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  hist(tail) ...' b1c3 g8f6 c1g5 d5e4 f2f3 e4f3 g1f3 f8e7'  actual='f1d3'
+    no-space : raw=' c3d5 c7d5'                 -> c3d5
+    w/ space : raw='0-0-0 0-'                   -> ILLEGAL/None
+  hist(tail) ...' f1d3 h7h6 g5h4 b8c6 e1g1 c6b4 d3e2 b4c6'  actual='a2a3'
+    no-space : raw=' e2f3 c6e7'                 -> ILLEGAL/None
+    w/ space : raw='0-0-0 c6d'                  -> ILLEGAL/None
+  hist(tail) ...' e2d3 c6d4 f3d4 d8d4 h4f2 d4d8 d1f3 c7c6'  actual='a1d1'
+    no-space : raw=' f3f2 c6c5'                 -> ILLEGAL/None
+    w/ space : raw='0-0-0 c6c'                  -> ILLEGAL/None
+  hist(tail) ...' f2e3 a5h5 f3g3 h5g4 g3e5 g4h5 e5g3 e7c5'  actual='g1h1'
+    no-space : raw=' g3f3 c5e5'                 -> g3f3
+    w/ space : raw='0-0-0 c5d'                  -> ILLEGAL/None
+  hist(tail) ...' g1f3 c7c6 b1c3 d7d5 c1e3 d5e4 c3e4 g8f6'  actual='f1d3'
+    no-space : raw=' f1e2 e7e5'                 -> f1e2
+    w/ space : raw='0-0-0 e4f'                  -> ILLEGAL/None
+  hist(tail) ...' f1d3 f6e4 d3e4 b8d7 d1d3 d7f6 e1c1 e8g8'  actual='h2h3'
+    no-space : raw=' c1e1 f6d5'                 -> ILLEGAL/None
+    w/ space : raw='0-0-0 e4f'                  -> ILLEGAL/None
+  hist(tail) ...' d3e4 c8f5 e4h4 d8a5 a2a3 f8e8 g2g4 f5e4'  actual='f3g5'
+    no-space : raw=' h4g4 e4f6'                 -> ILLEGAL/None
+    w/ space : raw='0-0-0 e4f'                  -> ILLEGAL/None
+  hist(tail) ...' h4h7 g8f8 d1h1 a5d5 h1h2 e7e5 h3h4 e5d4'  actual='e3d2'
+    no-space : raw=' c1d2 d4e3'                 -> c1d2
+    w/ space : raw='0-1\n1. e2'                 -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-base-uci: 50/300
+  chess-base-uci: 100/300
+  chess-base-uci: 150/300
+  chess-base-uci: 200/300
+  chess-base-uci: 250/300
+  chess-base-uci: 300/300
+  -> {'model': 'chess-base-uci', 'n': 300, 'n_legal': 129, 'legal_move_rate': 0.43, 'move_match_actual': 0.0667, 'move_match_stockfish': 0.04, 'mean_acpl_legal': 354.2, 'median_acpl_legal': 165}
+== FINE-TUNED [uci] (merged-model/chess-ft-uci) ==
+The tokenizer you are loading from 'merged-model/chess-ft-uci' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+
+----- DEBUG chess-ft-uci [uci]: prompt/gen/parse on first 8 positions -----
+  hist(tail) ...' b1c3 g8f6 c1g5 d5e4 f2f3 e4f3 g1f3 f8e7'  actual='f1d3'
+    no-space : raw=' f1c4 e8g8'                 -> f1c4
+    w/ space : raw=' f1c4 e8g8'                 -> f1c4
+  hist(tail) ...' f1d3 h7h6 g5h4 b8c6 e1g1 c6b4 d3e2 b4c6'  actual='a2a3'
+    no-space : raw=' a2a3 c8d7'                 -> a2a3
+    w/ space : raw='2c3 e8g8 d'                 -> ILLEGAL/None
+  hist(tail) ...' e2d3 c6d4 f3d4 d8d4 h4f2 d4d8 d1f3 c7c6'  actual='a1d1'
+    no-space : raw=' f3g3 e7d6'                 -> f3g3
+    w/ space : raw='1f1 e7d6 f'                 -> ILLEGAL/None
+  hist(tail) ...' f2e3 a5h5 f3g3 h5g4 g3e5 g4h5 e5g3 e7c5'  actual='g1h1'
+    no-space : raw=' g1h1 c5e3'                 -> g1h1
+    w/ space : raw='3c4 c5e3 c'                 -> ILLEGAL/None
+  hist(tail) ...' g1f3 c7c6 b1c3 d7d5 c1e3 d5e4 c3e4 g8f6'  actual='f1d3'
+    no-space : raw=' e4f6 g7f6'                 -> e4f6
+    w/ space : raw=' e4f6 g7f6'                 -> e4f6
+  hist(tail) ...' f1d3 f6e4 d3e4 b8d7 d1d3 d7f6 e1c1 e8g8'  actual='h2h3'
+    no-space : raw=' e4g6 h7g6'                 -> e4g6
+    w/ space : raw='3e2 c8g4 d'                 -> ILLEGAL/None
+  hist(tail) ...' d3e4 c8f5 e4h4 d8a5 a2a3 f8e8 g2g4 f5e4'  actual='f3g5'
+    no-space : raw=' h4h7 g8f8'                 -> h4h7
+    w/ space : raw='4h2 e4f3 h'                 -> ILLEGAL/None
+  hist(tail) ...' h4h7 g8f8 d1h1 a5d5 h1h2 e7e5 h3h4 e5d4'  actual='e3d2'
+    no-space : raw=' e3d4 d5d4'                 -> e3d4
+    w/ space : raw='3h1 d5e4 h'                 -> ILLEGAL/None
+-------------------------------------------------------------
+
+  chess-ft-uci: 50/300
+  chess-ft-uci: 100/300
+  chess-ft-uci: 150/300
+  chess-ft-uci: 200/300
+  chess-ft-uci: 250/300
+  chess-ft-uci: 300/300
+  -> {'model': 'chess-ft-uci', 'n': 300, 'n_legal': 286, 'legal_move_rate': 0.9533, 'move_match_actual': 0.3033, 'move_match_stockfish': 0.2333, 'mean_acpl_legal': 528.5, 'median_acpl_legal': 72.0}
+== FT vs Stockfish 1200 (6 games) ==
+  -> {'opponent': 'stockfish:1200', 'games': 6, 'wins': 0, 'draws': 0, 'losses': 6, 'score_rate': 0.0}
+
+================ VERDICT ================
+metric                    base    fine-tuned
+legal-move %              0.43        0.9533
+match human             0.0667        0.3033
+match SF                  0.04        0.2333
+ACPL (lower=better)      354.2         528.5
+========================================

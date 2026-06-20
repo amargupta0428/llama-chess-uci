@@ -1,0 +1,10 @@
+{
+  "model": "chess-base-uci",
+  "n": 400,
+  "n_legal": 180,
+  "legal_move_rate": 0.45,
+  "move_match_actual": 0.045,
+  "move_match_stockfish": 0.0375,
+  "mean_acpl_legal": 2086.7,
+  "median_acpl_legal": 255.0
+}
