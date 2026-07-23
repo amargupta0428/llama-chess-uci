@@ -76,3 +76,5 @@ results/               Eval outputs for every experiment, incl. 800 per-position
 ## License
 
 Built with Llama. This is a derivative of Meta Llama 3.1 8B, used and redistributed under the Llama 3.1 Community License (see `LICENSE`) and the Acceptable Use Policy (see `USE_POLICY.md`). Llama 3.1 is licensed under the Llama 3.1 Community License, Copyright Meta Platforms, Inc. Model name: Llama-3.1-8B-Chess-UCI.
+
+*AI involvement: this project was built with heavy use of Claude (Anthropic) for code and analysis; all results were verified by the author.*
