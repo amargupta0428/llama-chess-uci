@@ -1,5 +1,7 @@
 # Llama-3.1-8B-Chess-UCI
 
+[![tests](https://github.com/amargupta0428/llama-chess-uci/actions/workflows/tests.yml/badge.svg)](https://github.com/amargupta0428/llama-chess-uci/actions/workflows/tests.yml)
+
 A full fine-tune of Llama 3.1 8B that learns to play chess by predicting the next move in UCI notation. Measured against a Stockfish oracle, the fine-tune takes the base model from **45% to 98% legal moves** and cuts **median centipawn loss from 255 to 55** (4.6x better move quality).
 
 **Built with Llama.**
